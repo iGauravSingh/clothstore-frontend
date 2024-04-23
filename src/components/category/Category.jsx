@@ -16,6 +16,7 @@
 import menCat from './menCat.jpg'
 import womanCat from './womanCat.jpg'
 import kidsCat from './kidsCat.jpg'
+import { Link } from 'react-router-dom'
 
 export default function Category() {
     return (
@@ -40,10 +41,10 @@ export default function Category() {
               <div className="flex items-end p-6">
                 <div>
                   <h3 className="font-semibold text-white">
-                    <a href="#">
+                    <Link to="category/woman">
                       <span className="absolute inset-0" />
                       Women
-                    </a>
+                    </Link>
                   </h3>
                   <p aria-hidden="true" className="mt-1 text-sm text-white">
                     Shop now
@@ -64,10 +65,10 @@ export default function Category() {
               <div className="flex items-end p-6 sm:absolute sm:inset-0">
                 <div>
                   <h3 className="font-semibold text-white">
-                    <a href="#">
+                    <Link to="/category/men">
                       <span className="absolute inset-0" />
                       Men
-                    </a>
+                    </Link>
                   </h3>
                   <p aria-hidden="true" className="mt-1 text-sm text-white">
                     Shop now
@@ -88,10 +89,10 @@ export default function Category() {
               <div className="flex items-end p-6 sm:absolute sm:inset-0">
                 <div>
                   <h3 className="font-semibold text-white">
-                    <a href="#">
+                    <Link to="/category/kids">
                       <span className="absolute inset-0" />
                       Kids
-                    </a>
+                    </Link>
                   </h3>
                   <p aria-hidden="true" className="mt-1 text-sm text-white">
                     Shop now

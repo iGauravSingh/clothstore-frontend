@@ -18,6 +18,7 @@ import { Bars3Icon, MagnifyingGlassIcon, ShoppingCartIcon, UserIcon, XMarkIcon }
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 import one from "./one.jpg"
+import { Link } from 'react-router-dom'
 
 const currencies = ['CAD', 'USD', 'AUD', 'EUR', 'GBP']
 const navigation = {
@@ -247,14 +248,14 @@ export default function Navbar() {
 
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <div className="flow-root">
-                    <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
+                    <Link to="/signup" className="-m-2 block p-2 font-medium text-gray-900">
                       Create an account
-                    </a>
+                    </Link>
                   </div>
                   <div className="flow-root">
-                    <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
+                    <Link to="/signin" className="-m-2 block p-2 font-medium text-gray-900">
                       Sign in
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
@@ -321,13 +322,13 @@ export default function Navbar() {
               </p> */}
 
               <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                <a href="#" className="text-sm font-medium text-white hover:text-gray-100">
+                <Link to="/signup" className="text-sm font-medium text-white hover:text-gray-100">
                   Create an account
-                </a>
+                </Link>
                 <span className="h-6 w-px bg-gray-600" aria-hidden="true" />
-                <a href="#" className="text-sm font-medium text-white hover:text-gray-100">
+                <Link to="/signin" className="text-sm font-medium text-white hover:text-gray-100">
                   Sign in
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -339,14 +340,14 @@ export default function Navbar() {
                 <div className="flex h-16 items-center justify-between">
                   {/* Logo (lg+) */}
                   <div className="hidden lg:flex lg:items-center">
-                    <a href="#">
+                    <Link to="/">
                       <span className="sr-only">Your Company</span>
                       <img
                         className="h-8 w-auto"
                         src={one}
                         alt=""
                       />
-                    </a>
+                    </Link>
                   </div>
 
                   <div className="hidden h-full lg:flex">
@@ -361,8 +362,8 @@ export default function Navbar() {
                                   <Popover.Button
                                     className={classNames(
                                       open
-                                        ? 'border-indigo-600 text-indigo-600'
-                                        : 'border-transparent text-gray-700 hover:text-gray-800',
+                                        ? 'border-indigo-600 text-indigo-600 outline-none'
+                                        : 'border-transparent text-gray-700 hover:text-gray-800 outline-none',
                                       'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out'
                                     )}
                                   >
@@ -379,7 +380,7 @@ export default function Navbar() {
                                   leaveFrom="opacity-100"
                                   leaveTo="opacity-0"
                                 >
-                                  <Popover.Panel className="absolute inset-x-0 top-full text-gray-500 sm:text-sm">
+                                  <Popover.Panel className="absolute inset-x-0 top-full text-gray-500 sm:text-sm z-50">
                                     {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
                                     <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
 
@@ -387,27 +388,7 @@ export default function Navbar() {
                                       <div className="mx-auto max-w-7xl px-8">
                                         <div className="grid grid-cols-2 items-start gap-x-8 gap-y-10 pb-12 pt-10">
                                           <div className="grid grid-cols-2 gap-x-8 gap-y-10">
-                                            <div>
-                                              <p
-                                                id={`desktop-featured-heading-${categoryIdx}`}
-                                                className="font-medium text-gray-900"
-                                              >
-                                                Featured
-                                              </p>
-                                              <ul
-                                                role="list"
-                                                aria-labelledby={`desktop-featured-heading-${categoryIdx}`}
-                                                className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                              >
-                                                {/* {category.featured.map((item) => (
-                                                  <li key={item.name} className="flex">
-                                                    <a href={item.href} className="hover:text-gray-800">
-                                                      {item.name}
-                                                    </a>
-                                                  </li>
-                                                ))} */}
-                                              </ul>
-                                            </div>
+                                            
                                             <div>
                                               <p id="desktop-categories-heading" className="font-medium text-gray-900">
                                                 Categories
@@ -428,43 +409,9 @@ export default function Navbar() {
                                             </div>
                                           </div>
                                           <div className="grid grid-cols-2 gap-x-8 gap-y-10">
-                                            <div>
-                                              <p id="desktop-collection-heading" className="font-medium text-gray-900">
-                                                Collection
-                                              </p>
-                                              <ul
-                                                role="list"
-                                                aria-labelledby="desktop-collection-heading"
-                                                className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                              >
-                                                {/* {category.collection.map((item) => (
-                                                  <li key={item.name} className="flex">
-                                                    <a href={item.href} className="hover:text-gray-800">
-                                                      {item.name}
-                                                    </a>
-                                                  </li>
-                                                ))} */}
-                                              </ul>
-                                            </div>
+                                            
 
-                                            <div>
-                                              <p id="desktop-brand-heading" className="font-medium text-gray-900">
-                                                Brands
-                                              </p>
-                                              <ul
-                                                role="list"
-                                                aria-labelledby="desktop-brand-heading"
-                                                className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                              >
-                                                {/* {category.brands.map((item) => (
-                                                  <li key={item.name} className="flex">
-                                                    <a href={item.href} className="hover:text-gray-800">
-                                                      {item.name}
-                                                    </a>
-                                                  </li>
-                                                ))} */}
-                                              </ul>
-                                            </div>
+                                             
                                           </div>
                                         </div>
                                       </div>
@@ -538,14 +485,14 @@ export default function Navbar() {
                       <span className="mx-4 h-6 w-px bg-gray-200 lg:mx-6" aria-hidden="true" />
 
                       <div className="flow-root">
-                        <a href="#" className="group -m-2 flex items-center p-2">
+                        <Link to="/cart" className="group -m-2 flex items-center p-2">
                           <ShoppingCartIcon
                             className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                             aria-hidden="true"
                           />
                           <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
                           <span className="sr-only">items in cart, view bag</span>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>

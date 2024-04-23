@@ -17,6 +17,7 @@
   import tshirt from './tshirt.jpg'
   import boyst from './boyst.jpg'
   import kidst from './kidst.jpg'
+import { Link } from 'react-router-dom'
 
 const products = [
     {
@@ -69,10 +70,10 @@ const products = [
                   />
                 </div>
                 <h3 className="mt-4 text-base font-semibold text-gray-900">
-                  <a href={product.href}>
+                  <Link to="/category/woman/tshirt/2">
                     <span className="absolute inset-0" />
                     {product.name}
-                  </a>
+                  </Link>
                 </h3>
                 <p className="mt-1 text-sm text-gray-500">{product.price}</p>
               </div>

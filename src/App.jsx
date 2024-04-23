@@ -4,13 +4,14 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Example from './pages/Example'
 import Homepage from './pages/homepage/Homepage'
+import { Outlet } from 'react-router-dom'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-    <Homepage />
+    <Outlet />
     </>
   )
 }

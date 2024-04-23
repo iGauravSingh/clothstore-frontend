@@ -65,11 +65,11 @@ export default function BannerBottom() {
                       </div>
   
                       <div className="mt-6 flex-shrink-0 sm:mt-0">
-                        <img
+                        {/* <img
                           className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
                           src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
                           alt=""
-                        />
+                        /> */}
                       </div>
                     </div>
                   </div>
