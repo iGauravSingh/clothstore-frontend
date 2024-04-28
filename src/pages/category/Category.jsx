@@ -400,7 +400,7 @@ export default function Category() {
                   <Link key={product.id} to={`/category/${type}/${dummyPro}/${product.id}`} className="group">
                     <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg sm:aspect-h-3 sm:aspect-w-2">
                       <img
-                        src={product.image}
+                        src={`https://ajayvastraliyamart.online${product.image}`}
                         alt={product.name}
                         className="h-full w-full object-cover object-center group-hover:opacity-75"
                       />
