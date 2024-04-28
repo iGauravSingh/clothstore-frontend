@@ -1,115 +1,105 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
+import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 import menCat from './menCat.jpg'
-import womanCat from './womanCat.jpg'
 import kidsCat from './kidsCat.jpg'
-import { Link } from 'react-router-dom'
+import womanCat from './womanCat.jpg'
 
-export default function Category() {
-    return (
-      <div className="bg-gray-50">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-          <div className="sm:flex sm:items-baseline sm:justify-between">
-            <h2 className="text-2xl font-bold tracking-tight text-gray-900">Shop by Category</h2>
-            {/* <a href="#" className="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block">
-              Browse all categories
-              <span aria-hidden="true"> &rarr;</span>
-            </a> */}
-          </div>
-  
-          <div className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-6 lg:gap-8">
-            <div className="group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-h-1 sm:aspect-w-1 sm:row-span-2">
-              <img
-                src={womanCat}
-                alt="Two models wearing women's black cotton crewneck tee and off-white cotton crewneck tee."
-                className="object-cover object-center group-hover:opacity-75"
-              />
-              <div aria-hidden="true" className="bg-gradient-to-b from-transparent to-black opacity-50" />
-              <div className="flex items-end p-6">
-                <div>
-                  <h3 className="font-semibold text-white">
-                    <Link to="category/woman">
-                      <span className="absolute inset-0" />
-                      Women
-                    </Link>
-                  </h3>
-                  <p aria-hidden="true" className="mt-1 text-sm text-white">
-                    Shop now
-                  </p>
-                </div>
+const categoryToShow = [
+  { id:1 , name: 'MEN', image: menCat, categoryIdentity: 'men'},
+  { id:1 , name: 'WOMAN', image: womanCat, categoryIdentity: 'woman'},
+  { id:1 , name: 'KIDS', image: kidsCat, categoryIdentity: 'kids'},
+]
+
+
+const Category = ({catData}) => {
+
+  const [categoryData, setCategoryData] = useState(categoryToShow)
+
+  if(catData){
+    setCategoryData([...categoryData, ...catData])
+  }
+ 
+ 
+
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const ref = useRef(null);
+
+  const onMouseDown = (e) => {
+    if (!ref.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - ref.current.offsetLeft);
+    setScrollLeft(ref.current.scrollLeft);
+  };
+
+  const onMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  const onMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const onMouseMove = (e) => {
+    if (!isDragging || !ref.current) return;
+    e.preventDefault(); // Prevent text selection
+    const x = e.pageX - ref.current.offsetLeft;
+    const walk = (x - startX) * 2; //scroll-fast
+    ref.current.scrollLeft = scrollLeft - walk;
+  };
+
+  useEffect(() => {
+    const currentRef = ref.current;
+    if (currentRef) {
+      currentRef.addEventListener("mousemove", onMouseMove);
+    }
+
+    return () => {
+      if (currentRef) {
+        currentRef.removeEventListener("mousemove", onMouseMove);
+      }
+    };
+  }, [onMouseMove]);
+
+  return (
+    <div className=" w-screen flex justify-center items-center mt-16 mb-16 font-poppins">
+      <div className=" w-[85%] flex justify-center items-center">
+        <div
+          ref={ref}
+          onMouseDown={onMouseDown}
+          onMouseLeave={onMouseLeave}
+          onMouseUp={onMouseUp}
+          className="flex overflow-auto cursor-grab select-none no-scrollbar"
+          style={{ userSelect: "none" }}
+        >
+          {/* Add your content here */}
+            <div className=" flex flex-nowrap gap-6 ">
+            
+          {categoryData?.map((category) => (
+            <div
+              key={category.id}
+              className=" flex-none snap-center touch-pan-x cursor-pointer  "
+            >
+              <Link to={`/category/${category.categoryIdentity}`} >
+              <div className=" flex flex-col  justify-center items-center gap-4  ">
+                <img
+                  className=" h-[5rem] md:h-[12rem] w-[5rem] md:w-[12rem] rounded-full hover:outline-4 hover:outline-blue-300 transition duration-150 ease-in-out"
+                  src={category.image}
+                  alt=""
+                />
+                <p>{category.name}</p>
               </div>
+              </Link>
             </div>
-            <div className="group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-none sm:relative sm:h-full">
-              <img
-                src={menCat}
-                alt="Wooden shelf with gray and olive drab green baseball caps, next to wooden clothes hanger with sweaters."
-                className="object-cover object-center group-hover:opacity-75 sm:absolute sm:inset-0 sm:h-full sm:w-full"
-              />
-              <div
-                aria-hidden="true"
-                className="bg-gradient-to-b from-transparent to-black opacity-50 sm:absolute sm:inset-0"
-              />
-              <div className="flex items-end p-6 sm:absolute sm:inset-0">
-                <div>
-                  <h3 className="font-semibold text-white">
-                    <Link to="/category/men">
-                      <span className="absolute inset-0" />
-                      Men
-                    </Link>
-                  </h3>
-                  <p aria-hidden="true" className="mt-1 text-sm text-white">
-                    Shop now
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-none sm:relative sm:h-full">
-              <img
-                src={kidsCat}
-                alt="Walnut desk organizer set with white modular trays, next to porcelain mug on wooden desk."
-                className="object-cover object-center group-hover:opacity-75 sm:absolute sm:inset-0 sm:h-full sm:w-full"
-              />
-              <div
-                aria-hidden="true"
-                className="bg-gradient-to-b from-transparent to-black opacity-50 sm:absolute sm:inset-0"
-              />
-              <div className="flex items-end p-6 sm:absolute sm:inset-0">
-                <div>
-                  <h3 className="font-semibold text-white">
-                    <Link to="/category/kids">
-                      <span className="absolute inset-0" />
-                      Kids
-                    </Link>
-                  </h3>
-                  <p aria-hidden="true" className="mt-1 text-sm text-white">
-                    Shop now
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-  
-          <div className="mt-6 sm:hidden">
-            <a href="#" className="block text-sm font-semibold text-indigo-600 hover:text-indigo-500">
-              Browse all categories
-              <span aria-hidden="true"> &rarr;</span>
-            </a>
+          ))}
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  );
+          }
+export default Category
   
