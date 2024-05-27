@@ -5,6 +5,7 @@ import Favorite from "../../components/favorite/Favorite"
 import Footer from "../../components/footer/Footer"
 import Hero from "../../components/hero/Hero"
 import Navbar from "../../components/navbar/Navbar"
+import Offer from "../../components/offer/Offer"
 
 
 const Homepage = () => {
@@ -13,8 +14,8 @@ const Homepage = () => {
     <Navbar />
     <Hero />
     <Category />
-    <BannerTop />
-    <Favorite />
+    <Offer />
+    
     <BannerBottom />
     <Footer />
     </>

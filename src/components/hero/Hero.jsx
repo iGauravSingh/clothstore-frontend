@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 
-import image1 from './one.jpg'; // Assuming image filenames are consistent
-import image2 from './two.jpg';
-import image3 from './three.jpg';
+// import image1 from './one.jpg'; 
+// import image2 from './two.jpg';
+// import image3 from './three.jpg';
+
+import image1 from './ch1.png'
+import image2 from './ch2.png'
+import image3 from './ch1.png'
 
 
 const images = [image1, image2, image3];

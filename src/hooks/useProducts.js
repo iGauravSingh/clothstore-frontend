@@ -6,7 +6,7 @@ import Cookie from "universal-cookie";
 
 const cookie = new Cookie();
 
-const urllocal = "http://localhost:8080";
+const urllocal = "https://ajayvastraliyamart.online";
 const urllive = "https://ajayvastraliyamart.online";
 
 const initialState = {
@@ -50,17 +50,16 @@ const useProducts = () => {
   const sessionToken = cookie.get("session_token");
   const [{ data, loading, error }, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    fetchProductList();
-  }, []);
+  
 
-  const fetchProductList = async () => {
+  const fetchProductList = async (cat,subcat) => {
     dispatch({ type: ActionType.LOADING });
     try {
-      const response = await axios.get(`https://ajayvastraliyamart.online/product`);
+      const response = await axios.get(`https://ajayvastraliyamart.online/category/${cat}/${subcat}`);
       const EventData = response.data;
       console.log(EventData)
       dispatch({ type: ActionType.SUCCESS, payload: EventData });
+      return EventData
     } catch (error) {
       // dispatch({
       //   type: ActionType.FAILED,
@@ -69,6 +68,17 @@ const useProducts = () => {
     }
   };
 
+ 
+const categoryProduct = async (data) => {
+    console.log('in category product', data)
+    try {
+      const response = await axios.get(`${urllocal}/category/${data}`);
+      const categoryProductData = response.data;
+      return categoryProductData
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
 
@@ -77,15 +87,29 @@ const useProducts = () => {
   const singleProduct = async (data) => {
     console.log('in single product')
     try {
-      const response = await axios.get(`${urllocal}/products/oneproduct/${data}`);
+      const response = await axios.get(`${urllocal}/product/${data}`);
       const ProductData = response.data;
+      console.log(ProductData)
       return ProductData
     } catch (error) {
       console.log(error);
     }
   };
 
-  return { data, loading, error, singleProduct };
+   // get All product details 
+   const allProduct = async (data) => {
+    console.log('in All product')
+    try {
+      const response = await axios.get(`${urllocal}/product`);
+      const ProductData = response.data;
+      console.log(ProductData)
+      return ProductData
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return { allProduct,fetchProductList, singleProduct,categoryProduct  };
 };
 
 export default useProducts;

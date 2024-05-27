@@ -20,6 +20,12 @@ import ProductDetails from './pages/productDetails/ProductDetails.jsx';
 import ProductInCategory from './pages/productincategory/ProductInCategory.jsx';
 import CategoryList from './pages/categoryList/CategoryList.jsx';
 import SubCategory from './pages/subCategory/SubCategory.jsx';
+import About from './pages/about/About.jsx';
+import Contact from './pages/contact/Contact.jsx';
+import Shop from './pages/shop/Shop.jsx';
+import NotFound from './pages/notfound/NotFound.jsx';
+import Profile from './pages/profile/Profile.jsx';
+import Search from './pages/search/Search.jsx';
 
 
 const router = createBrowserRouter(
@@ -28,12 +34,19 @@ const router = createBrowserRouter(
       <Route path='/' element={<Homepage />} />
       <Route path='/signin' element={<Signin />} />
       <Route path='/signup' element={<Signup />} />
+      <Route path='/shop' element={<Shop />} />
+      <Route path='/about' element={<About />} />
+      <Route path='/contact' element={<Contact />} />
       <Route path='/cart' element={<Cart />} />
       <Route path='/category' element={<CategoryList />} />
+      <Route path='/profile' element={<Profile />} />
+      <Route path='/search' element={<Search />} />
+      <Route path='/product/:id' element={<ProductDetails />} />
       <Route path='/category/:type' element={<SubCategory />} />
-      <Route path='/category/:type/:product' element={<Category />} />
-      <Route path='/category/:type/:product/:id' element={<ProductDetails />} />
+      <Route path='/category/:type/:products' element={<Category />} />
+      <Route path='/category/:type/:products/:id' element={<ProductDetails />} />
       <Route path='/orderdetails' element={<OrderDetails />} />
+      <Route path='*' element={<NotFound />} />
       
     </Route>
   )

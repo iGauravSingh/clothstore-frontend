@@ -13,7 +13,7 @@
   }
   ```
 */
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Disclosure, Menu, Popover, Tab, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
@@ -108,12 +108,12 @@ const filters = [
     id: 'category',
     name: 'Category',
     options: [
-      { value: 'tees', label: 'Tees' },
-      { value: 'crewnecks', label: 'Crewnecks' },
-      { value: 'hats', label: 'Hats' },
-      { value: 'bundles', label: 'Bundles' },
-      { value: 'carry', label: 'Carry' },
-      { value: 'objects', label: 'Objects' },
+      { value: '1', label: '1' },
+      { value: '2', label: '2' },
+      // { value: 'hats', label: 'Hats' },
+      // { value: 'bundles', label: 'Bundles' },
+      // { value: 'carry', label: 'Carry' },
+      // { value: 'objects', label: 'Objects' },
     ],
   },
   {
@@ -163,16 +163,70 @@ function classNames(...classes) {
 
 export default function Category() {
 
-  const { data, loading, error } = useProducts()
+  const { fetchProductList } = useProducts()
 
-  const products1 = data
+  
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
-  const {type, product} = useParams()
+  const [subCatSelect, setSubCatSel] = useState(null)
 
-  const dummyPro = product
+  const [dataCat, setDataCat] = useState(null)
+
+  const {type, products} = useParams()
+
+  console.log(type,products)
+
+
+  //
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState(null);
+
+  
+
+  useEffect(() => {
+    const fetchProductInSubCat = async () => {
+      console.log("going to fetch product data");
+      try {
+        const subCatData = await fetchProductList(type,products);
+        console.log(subCatData);
+        setDataCat(subCatData);
+      } catch (error) {
+        console.error("Error fetching subCatData data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (type && products) { // Only fetch data if `type` is defined
+      setIsLoading(true); // Reset loading state before fetching new data
+      fetchProductInSubCat();
+    }
+  }, []); // Run the effect when `type` or `categoryProduct` changes
+
+  if (isLoading) {
+    return (
+      <div>
+        <p>Loading....</p>
+      </div>
+    );
+  }
+
+  //
+
+  const dummyPro = products
+
+  const handleSubCatChange  = (id) => {
+    console.log(id)
+    setSubCatSel(id)
+    if(!subCatSelect) {
+      setDataCat(data.filter(da=> da.subcategory !== id))
+    }
+  }
+
+  
 
   return (
     <div className="bg-gray-50">
@@ -272,7 +326,7 @@ export default function Category() {
             <div className="py-24 text-center">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
               <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">
-                Thoughtfully designed objects for the workspace, home, and travel.
+                Fresh Collections for you
               </p>
             </div>
 
@@ -369,6 +423,7 @@ export default function Category() {
                                   name={`${section.id}[]`}
                                   defaultValue={option.value}
                                   defaultChecked={option.checked}
+                                  onChange={() => handleSubCatChange(option.value)}
                                   type="checkbox"
                                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 />
@@ -396,11 +451,11 @@ export default function Category() {
               </h2>
 
               <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-                {products1?.map((product) => (
+                {dataCat?.map((product) => (
                   <Link key={product.id} to={`/category/${type}/${dummyPro}/${product.id}`} className="group">
                     <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg sm:aspect-h-3 sm:aspect-w-2">
                       <img
-                        src={`https://ajayvastraliyamart.online${product.image}`}
+                        src={`https://ajayvastraliyamart.online/${product.image}`}
                         alt={product.name}
                         className="h-full w-full object-cover object-center group-hover:opacity-75"
                       />

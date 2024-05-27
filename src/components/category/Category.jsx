@@ -3,12 +3,20 @@ import { Link } from "react-router-dom";
 
 import menCat from './menCat.jpg'
 import kidsCat from './kidsCat.jpg'
+import vskidsCat from './verySmallKid.png'
+import skidsCat from './smallkid.png'
+import mkidsCat from './mediumKid.png'
+import bigkidsCat from './bigKid.png'
 import womanCat from './womanCat.jpg'
 
 const categoryToShow = [
-  { id:1 , name: 'MEN', image: menCat, categoryIdentity: 'men'},
-  { id:1 , name: 'WOMAN', image: womanCat, categoryIdentity: 'woman'},
-  { id:1 , name: 'KIDS', image: kidsCat, categoryIdentity: 'kids'},
+  
+  { id:3 , name: 'Baby', image: vskidsCat, categoryIdentity: 'kids'},
+  { id:4 , name: 'Todlers', image: skidsCat, categoryIdentity: 'kids'},
+  { id:5 , name: 'adventurous', image: mkidsCat, categoryIdentity: 'kids'},
+  { id:6 , name: 'Creative', image: bigkidsCat, categoryIdentity: 'kids'},
+  { id:1 , name: 'Men', image: menCat, categoryIdentity: 'men'},
+  { id:2 , name: 'Women', image: womanCat, categoryIdentity: 'woman'},
 ]
 
 

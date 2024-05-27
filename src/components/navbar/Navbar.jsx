@@ -24,70 +24,20 @@ const currencies = ['CAD', 'USD', 'AUD', 'EUR', 'GBP']
 const navigation = {
   categories: [
     {
-      name: 'Women',
-      // featured: [
-      //   { name: 'Sleep', href: '#' },
-      //   { name: 'Swimwear', href: '#' },
-      //   { name: 'Underwear', href: '#' },
-      // ],
-      // collection: [
-      //   { name: 'Everything', href: '#' },
-      //   { name: 'Core', href: '#' },
-      //   { name: 'New Arrivals', href: '#' },
-      //   { name: 'Sale', href: '#' },
-      // ],
-      categories: [
-        { name: 'Basic Tees', href: '#' },
-        { name: 'Artwork Tees', href: '#' },
-        { name: 'Bottoms', href: '#' },
-        { name: 'Underwear', href: '#' },
-        { name: 'Accessories', href: '#' },
-      ],
-      // brands: [
-      //   { name: 'Full Nelson', href: '#' },
-      //   { name: 'My Way', href: '#' },
-      //   { name: 'Re-Arranged', href: '#' },
-      //   { name: 'Counterfeit', href: '#' },
-      //   { name: 'Significant Other', href: '#' },
-      // ],
+      name: 'Home',
+      address: "/"
     },
     {
-      name: 'Men',
-      // featured: [
-      //   { name: 'Casual', href: '#' },
-      //   { name: 'Boxers', href: '#' },
-      //   { name: 'Outdoor', href: '#' },
-      // ],
-      // collection: [
-      //   { name: 'Everything', href: '#' },
-      //   { name: 'Core', href: '#' },
-      //   { name: 'New Arrivals', href: '#' },
-      //   { name: 'Sale', href: '#' },
-      // ],
-      categories: [
-        { name: 'Artwork Tees', href: '#' },
-        { name: 'Pants', href: '#' },
-        { name: 'Accessories', href: '#' },
-        { name: 'Boxers', href: '#' },
-        { name: 'Basic Tees', href: '#' },
-      ],
-      // brands: [
-      //   { name: 'Significant Other', href: '#' },
-      //   { name: 'My Way', href: '#' },
-      //   { name: 'Counterfeit', href: '#' },
-      //   { name: 'Re-Arranged', href: '#' },
-      //   { name: 'Full Nelson', href: '#' },
-      // ],
+      name: 'Shop',
+      address: "/shop"
     },
     {
-      name: "Kids",
-      categories: [
-        { name: 'Artwork Tees', href: '#' },
-        { name: 'Pants', href: '#' },
-        { name: 'Accessories', href: '#' },
-        { name: 'Boxers', href: '#' },
-        { name: 'Basic Tees', href: '#' },
-      ],
+      name: "About",
+      address: "/about"
+    },
+    {
+      name: "Contact",
+      address: "/contact"
     }
   ],
   pages: [
@@ -151,99 +101,23 @@ export default function Navbar() {
                           key={category.name}
                           className={({ selected }) =>
                             classNames(
-                              selected ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-900',
+                              selected ? 'border-[#67e8f9] text-[#e24277]' : 'border-transparent text-[#e24277]',
                               'flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium'
                             )
                           }
                         >
+                          <Link to={category.address}>
                           {category.name}
+                          </Link>
                         </Tab>
                       ))}
                     </Tab.List>
                   </div>
-                  <Tab.Panels as={Fragment}>
-                    {navigation.categories.map((category, categoryIdx) => (
-                      <Tab.Panel key={category.name} className="space-y-12 px-4 pb-6 pt-10">
-                        <div className="grid grid-cols-1 items-start gap-x-6 gap-y-10">
-                          <div className="grid grid-cols-1 gap-x-6 gap-y-10">
-                            <div>
-                              {/* <p id={`mobile-featured-heading-${categoryIdx}`} className="font-medium text-gray-900">
-                                Featured
-                              </p> */}
-                              {/* <ul
-                                role="list"
-                                aria-labelledby={`mobile-featured-heading-${categoryIdx}`}
-                                className="mt-6 space-y-6"
-                              > */}
-                                {/* {category.featured.map((item) => (
-                                  <li key={item.name} className="flex">
-                                    <a href={item.href} className="text-gray-500">
-                                      {item.name}
-                                    </a>
-                                  </li>
-                                ))} */}
-                              {/* </ul> */}
-                            </div>
-                            <div>
-                              <p id="mobile-categories-heading" className="font-medium text-gray-900">
-                                Categories
-                              </p>
-                              <ul role="list" aria-labelledby="mobile-categories-heading" className="mt-6 space-y-6">
-                                {category.categories.map((item) => (
-                                  <li key={item.name} className="flex">
-                                    <a href={item.href} className="text-gray-500">
-                                      {item.name}
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-1 gap-x-6 gap-y-10">
-                            <div>
-                              {/* <p id="mobile-collection-heading" className="font-medium text-gray-900">
-                                Collection
-                              </p> */}
-                              {/* <ul role="list" aria-labelledby="mobile-collection-heading" className="mt-6 space-y-6"> */}
-                                {/* {category.collection.map((item) => (
-                                  <li key={item.name} className="flex">
-                                    <a href={item.href} className="text-gray-500">
-                                      {item.name}
-                                    </a>
-                                  </li>
-                                ))} */}
-                              {/* </ul> */}
-                            </div>
-
-                            {/* <div>
-                              <p id="mobile-brand-heading" className="font-medium text-gray-900">
-                                Brands
-                              </p>
-                              <ul role="list" aria-labelledby="mobile-brand-heading" className="mt-6 space-y-6">
-                                {category.brands.map((item) => (
-                                  <li key={item.name} className="flex">
-                                    <a href={item.href} className="text-gray-500">
-                                      {item.name}
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div> */}
-                          </div>
-                        </div>
-                      </Tab.Panel>
-                    ))}
-                  </Tab.Panels>
+                  
                 </Tab.Group>
 
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                  {/* {navigation.pages.map((page) => (
-                    <div key={page.name} className="flow-root">
-                      <a href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
-                        {page.name}
-                      </a>
-                    </div>
-                  ))} */}
+                  
                 </div>
 
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
@@ -292,7 +166,7 @@ export default function Navbar() {
       <header className="relative">
         <nav aria-label="Top">
           {/* Top navigation */}
-          <div className="bg-gray-900">
+          <div className="bg-[#67e8f9]">
             <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
               {/* Currency selector */}
               {/* <form className="hidden lg:block lg:flex-1">
@@ -325,7 +199,7 @@ export default function Navbar() {
                 <Link to="/signup" className="text-sm font-medium text-white hover:text-gray-100">
                   Create an account
                 </Link>
-                <span className="h-6 w-px bg-gray-600" aria-hidden="true" />
+                <span className="h-6 w-px bg-white" aria-hidden="true" />
                 <Link to="/signin" className="text-sm font-medium text-white hover:text-gray-100">
                   Sign in
                 </Link>
@@ -340,14 +214,12 @@ export default function Navbar() {
                 <div className="flex h-16 items-center justify-between">
                   {/* Logo (lg+) */}
                   <div className="hidden lg:flex lg:items-center">
-                    <Link to="/">
-                      <span className="sr-only">Your Company</span>
-                      <img
-                        className="h-8 w-auto"
-                        src={one}
-                        alt=""
-                      />
-                    </Link>
+                  <Link to="/">
+            <h1 className=" flex justify-center items-center">
+              <span className=" font-poppins text-2xl text-cyan-500">Ajay</span>{" "}
+              <span className=" font-caveat text-4xl text-pink-600">Vastralay</span>
+            </h1>
+          </Link>
                   </div>
 
                   <div className="hidden h-full lg:flex">
@@ -367,57 +239,13 @@ export default function Navbar() {
                                       'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out'
                                     )}
                                   >
+                                    <Link to={category.address}>
                                     {category.name}
+                                    </Link>
                                   </Popover.Button>
                                 </div>
 
-                                <Transition
-                                  as={Fragment}
-                                  enter="transition ease-out duration-200"
-                                  enterFrom="opacity-0"
-                                  enterTo="opacity-100"
-                                  leave="transition ease-in duration-150"
-                                  leaveFrom="opacity-100"
-                                  leaveTo="opacity-0"
-                                >
-                                  <Popover.Panel className="absolute inset-x-0 top-full text-gray-500 sm:text-sm z-50">
-                                    {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                                    <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
-
-                                    <div className="relative bg-white">
-                                      <div className="mx-auto max-w-7xl px-8">
-                                        <div className="grid grid-cols-2 items-start gap-x-8 gap-y-10 pb-12 pt-10">
-                                          <div className="grid grid-cols-2 gap-x-8 gap-y-10">
-                                            
-                                            <div>
-                                              <p id="desktop-categories-heading" className="font-medium text-gray-900">
-                                                Categories
-                                              </p>
-                                              <ul
-                                                role="list"
-                                                aria-labelledby="desktop-categories-heading"
-                                                className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                              >
-                                                {category.categories.map((item) => (
-                                                  <li key={item.name} className="flex">
-                                                    <a href={item.href} className="hover:text-gray-800">
-                                                      {item.name}
-                                                    </a>
-                                                  </li>
-                                                ))}
-                                              </ul>
-                                            </div>
-                                          </div>
-                                          <div className="grid grid-cols-2 gap-x-8 gap-y-10">
-                                            
-
-                                             
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </Popover.Panel>
-                                </Transition>
+                                
                               </>
                             )}
                           </Popover>
@@ -448,37 +276,36 @@ export default function Navbar() {
                     </button>
 
                     {/* Search */}
-                    <a href="#" className="ml-2 p-2 text-gray-400 hover:text-gray-500">
+                    <Link to="/search" className="ml-2 p-2 text-gray-400 hover:text-gray-500">
                       <span className="sr-only">Search</span>
                       <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                    </a>
+                    </Link>
                   </div>
 
                   {/* Logo (lg-) */}
-                  <a href="#" className="lg:hidden">
-                    <span className="sr-only">Your Company</span>
-                    <img
-                      src={one}
-                      alt=""
-                      className="h-8 w-auto"
-                    />
-                  </a>
+                  <Link to="/" className="lg:hidden">
+                    <span className="sr-only">Ajay Vastralay A Clothing Store in Lucknow Uttar Pradesh India</span>
+                    <h1 className=" flex justify-center items-center">
+              <span className=" font-poppins text-2xl text-cyan-500">Ajay</span>{" "}
+              <span className=" font-caveat text-4xl text-pink-600">Vastralay</span>
+            </h1>
+                  </Link>
 
                   <div className="flex flex-1 items-center justify-end">
                     <div className="flex items-center lg:ml-8">
                       <div className="flex space-x-8">
                         <div className="hidden lg:flex">
-                          <a href="#" className="-m-2 p-2 text-gray-400 hover:text-gray-500">
+                          <Link to="/search" className="-m-2 p-2 text-gray-400 hover:text-gray-500">
                             <span className="sr-only">Search</span>
                             <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                          </a>
+                          </Link>
                         </div>
 
                         <div className="flex">
-                          <a href="#" className="-m-2 p-2 text-gray-400 hover:text-gray-500">
+                          <Link to="/profile" className="-m-2 p-2 text-gray-400 hover:text-gray-500">
                             <span className="sr-only">Account</span>
                             <UserIcon className="h-6 w-6" aria-hidden="true" />
-                          </a>
+                          </Link>
                         </div>
                       </div>
 
